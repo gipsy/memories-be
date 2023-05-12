@@ -17,7 +17,7 @@ app.use(cors());
 app.use('/posts', postRoutes);
 app.use('/user', userRoutes);
 
-app.get('/', (req, res) => {
+app.get('/', ( res) => {
   res.send('APP IS RUNNING.');
 })
 
