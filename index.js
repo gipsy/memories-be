@@ -26,8 +26,12 @@ const PORT = process.env.PORT || 5000;
 
 const connectionUrl = normalizeConnectionUrl(process.env.CONNECTION_URL);
 
-mongoose.connect(connectionUrl)
-  .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
-  .catch((error) => console.log(error.message));
+// Bind HTTP first so Render health checks pass; Mongo connects in the background.
+app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
+
+mongoose
+  .connect(connectionUrl)
+  .then(() => console.log('MongoDB connected:', mongoose.connection.host))
+  .catch((error) => console.error('MongoDB connection failed:', error.message));
 
 // https://www.mongodb.com/cloud/atlas
