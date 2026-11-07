@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: memories
+    runtime: node
+    repo: https://github.com/gipsy/memories-be
+    branch: main
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: CONNECTION_URL
+        sync: false
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false

@@ -39,10 +39,24 @@ Node.js **Express** REST API for the [Memories](https://github.com/gipsy/memorie
 3. Start the API:
 
    ```bash
-   npm start
+   npm start          # production: node index.js
+   npm run dev        # local: nodemon
    ```
 
-   Default port is **5000** (`nodemon` watches `index.js`).
+   Default port is **5000** (Render sets `PORT`).
+
+## Deploy (Render)
+
+| Setting | Value |
+|--------|--------|
+| Build | `npm install` |
+| Start | `npm start` (`node index.js`) |
+| Node | **20** — set `NODE_VERSION=20` in the dashboard (or `package.json` `engines` + `.nvmrc`) |
+| `CONNECTION_URL` | Atlas **M0** URI for `cluster0…` (not the old `clustermemories` host) |
+
+**Atlas:** [Network Access](https://www.mongodb.com/docs/atlas/security/ip-access-list/) must allow Render (often `0.0.0.0/0` on M0). Otherwise logs show *“IP isn’t whitelisted”* even when the URI is correct.
+
+**If logs show Node 14 EOL:** an old deploy (pre-`657b04f`) — today’s **live** deploy uses Node 20 and connects to Mongo. See `render.yaml`.
 
 ## HTTP surface
 
